@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="Registro personal de entrenamientos de gimnasio.">
+  <title>GYM | Mi entrenamiento</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="GYM inicio"><span class="brand-mark">G</span><span>GYM<span class="brand-dot">.</span></span></a>
+    <nav aria-label="Navegación principal">
+      <button class="nav-btn active" data-view="train">Entrenar</button>
+      <button class="nav-btn" data-view="history">Historial</button>
+      <button class="nav-btn" data-view="stats">Progreso</button>
+    </nav>
+    <button id="backupBtn" class="icon-btn" title="Exportar o importar copia de seguridad" aria-label="Copia de seguridad">⇧</button>
+  </header>
+
+  <main class="container">
+    <section id="trainView" class="view">
+      <div class="hero">
+        <div><p class="eyebrow">TU ESPACIO DE ENTRENAMIENTO</p><h1>¿Qué toca <span>hoy?</span></h1><p class="muted">Elegí un grupo muscular y registrá cada serie.</p></div>
+        <div class="date-card"><span class="date-label">FECHA DE HOY</span><strong id="todayDate">—</strong></div>
+      </div>
+
+      <div class="section-heading"><div><p class="eyebrow">PASO 01</p><h2>Grupo muscular</h2></div><span class="step-count">01 / 03</span></div>
+      <div id="groups" class="groups-grid">
+        <button class="group-card" data-group="Pecho"><span class="group-icon">▰</span><span>Pecho</span></button>
+        <button class="group-card" data-group="Espalda"><span class="group-icon">◈</span><span>Espalda</span></button>
+        <button class="group-card" data-group="Piernas"><span class="group-icon">⌁</span><span>Piernas</span></button>
+        <button class="group-card" data-group="Brazos"><span class="group-icon">↗</span><span>Brazos</span></button>
+        <button class="group-card" data-group="Hombros"><span class="group-icon">◇</span><span>Hombros</span></button>
+        <button class="group-card" data-group="Fullbody"><span class="group-icon">✣</span><span>Fullbody</span></button>
+      </div>
+
+      <section id="exerciseSection" class="panel hidden">
+        <div class="section-heading"><div><p class="eyebrow">PASO 02</p><h2 id="exerciseTitle">Ejercicios</h2></div><button id="addExerciseBtn" class="text-btn">＋ Agregar ejercicio</button></div>
+        <div id="exerciseChoices" class="exercise-choices"></div>
+        <div id="customExerciseForm" class="inline-form hidden"><input id="customExerciseName" type="text" maxlength="60" placeholder="Nombre del ejercicio"><button id="confirmExerciseBtn" class="primary-btn">Agregar</button></div>
+      </section>
+
+      <section id="workoutSection" class="panel hidden">
+        <div class="section-heading"><div><p class="eyebrow">PASO 03</p><h2 id="workoutTitle">Tu sesión</h2></div><button id="addAnotherExerciseBtn" class="text-btn">＋ Otro ejercicio</button></div>
+        <div id="selectedExercises"></div>
+        <div class="session-footer"><div><span class="muted small">Cuando termines, guardá tu sesión.</span><strong id="sessionSummary">0 ejercicios · 0 series</strong></div><button id="saveWorkoutBtn" class="primary-btn">Guardar entrenamiento <span>→</span></button></div>
+      </section>
+    </section>
+
+    <section id="historyView" class="view hidden">
+      <div class="page-heading"><p class="eyebrow">TU RECORRIDO</p><h1>Historial<span>.</span></h1><p class="muted">Todos tus entrenamientos, en un solo lugar.</p></div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+
+    <section id="statsView" class="view hidden">
+      <div class="page-heading"><p class="eyebrow">CONSTANCIA Y EVOLUCIÓN</p><h1>Tu progreso<span>.</span></h1><p class="muted">Los números de tu trabajo.</p></div>
+      <div id="statsGrid" class="stats-grid"></div>
+      <div class="panel"><div class="section-heading"><div><p class="eyebrow">ACTIVIDAD</p><h2>Últimos entrenamientos</h2></div></div><div id="activityList"></div></div>
+    </section>
+  </main>
+
+  <footer><span>GYM<span class="brand-dot">.</span></span><span>Tus datos quedan guardados en este navegador.</span></footer>
+
+  <dialog id="backupDialog" class="modal">
+    <form method="dialog" class="modal-head"><div><p class="eyebrow">TUS DATOS</p><h2>Copia de seguridad</h2></div><button class="close-btn" aria-label="Cerrar">×</button></form>
+    <p class="muted">Exportá tus entrenamientos para guardarlos o importá una copia anterior. Recomendado si cambiás de navegador o dispositivo.</p>
+    <div class="modal-actions"><button id="exportBtn" class="primary-btn">Descargar copia JSON</button><label class="secondary-btn file-label">Importar copia<input id="importFile" type="file" accept="application/json"></label></div>
+    <p id="backupMessage" class="small muted" aria-live="polite"></p>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
