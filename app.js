@@ -8,7 +8,16 @@ const todayISO=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMo
 const dateLabel=iso=>{const [y,m,d]=iso.split('-').map(Number);return new Date(y,m-1,d).toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})};
 const req=r=>new Promise((resolve,reject)=>{r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});
 function openDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open('gym-personal-v1',1);r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains('workouts'))d.createObjectStore('workouts',{keyPath:'id'});if(!d.objectStoreNames.contains('settings'))d.createObjectStore('settings',{keyPath:'key'})};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
-async function loadWorkouts(){workouts=(await req(db.transaction('workouts').objectStore('workouts').getAll())).sort((a,b)=>b.date.localeCompare(a.date))}
+async function loadWorkouts(){
+ workouts=(await req(db.transaction('workouts').objectStore('workouts').getAll()));
+ let migrated=false;
+ workouts.forEach(w=>(w.exercises||[]).forEach((e,ei)=>{
+  if(!e.id){e.id='e_legacy_'+w.id+'_'+ei;migrated=true}
+  (e.sets||[]).forEach((s,si)=>{if(!s.id){s.id='s_legacy_'+w.id+'_'+ei+'_'+si;migrated=true}})
+ }));
+ if(migrated){const tx=db.transaction('workouts','readwrite'),os=tx.objectStore('workouts');workouts.forEach(w=>os.put(w));await new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+ workouts.sort((a,b)=>b.date.localeCompare(a.date))
+}
 function screen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));$('#'+id).classList.remove('hidden');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='savedScreen')renderSaved();if(id==='progressScreen')renderProgress()}
 function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2100)}
 function makeButtons(selector,items,handler){const el=$(selector);el.innerHTML='';items.forEach(item=>{const b=document.createElement('button');b.className='choice-btn';b.textContent=item;b.addEventListener('click',()=>handler(item));el.append(b)})}
