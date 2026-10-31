@@ -1,82 +1,26 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101610">
-  <meta name="description" content="Registro rápido de entrenamiento de gimnasio.">
-  <title>GYM | Entrenamiento</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101610">
+<meta name="description" content="Registro rápido de entrenamiento de gimnasio."><title>GYM | Entrenamiento</title>
+<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
 </head>
 <body>
-  <main class="app">
-    <header class="brand"><span class="brand-icon">G</span><span>GYM<span class="dot">.</span></span></header>
-
-    <section id="startScreen" class="screen">
-      <p class="eyebrow">REGISTRO DE ENTRENAMIENTO</p>
-      <h1>¿Cuándo<br>entrenaste?</h1>
-      <div class="big-actions">
-        <button id="todayBtn" class="big-btn primary">HOY</button>
-        <button id="otherDayBtn" class="big-btn">OTRO DÍA</button>
-      </div>
-      <div id="otherDateWrap" class="date-wrap hidden">
-        <label for="otherDate">Elegí la fecha</label>
-        <input id="otherDate" type="date">
-        <button id="confirmDateBtn" class="big-btn primary">CONTINUAR</button>
-      </div>
-    </section>
-
-    <section id="muscleScreen" class="screen hidden">
-      <button class="back-btn" data-back="startScreen">← VOLVER</button>
-      <p class="eyebrow">PASO 1</p>
-      <h1>¿Qué músculo<br>entrenaste?</h1>
-      <p id="chosenDate" class="date-caption"></p>
-      <div id="muscleButtons" class="button-grid six"></div>
-    </section>
-
-    <section id="exerciseScreen" class="screen hidden">
-      <button class="back-btn" data-back="muscleScreen">← VOLVER</button>
-      <p class="eyebrow">PASO 2</p>
-      <h1>¿Qué ejercicio?</h1>
-      <p id="chosenMuscle" class="date-caption"></p>
-      <div id="exerciseButtons" class="exercise-list"></div>
-    </section>
-
-    <section id="weightScreen" class="screen hidden">
-      <button class="back-btn" data-back="exerciseScreen">← VOLVER</button>
-      <p class="eyebrow">PASO 3</p>
-      <h1>Peso total</h1>
-      <p id="chosenExerciseWeight" class="date-caption"></p>
-      <div class="weight-total"><strong id="weightTotal">0</strong><span>KG</span></div>
-      <p class="hint">Tocá los botones para sumar peso</p>
-      <div id="weightButtons" class="button-grid five"></div>
-      <button id="weightContinue" class="big-btn primary continue-btn">CONTINUAR</button>
-    </section>
-
-    <section id="repsScreen" class="screen hidden">
-      <button class="back-btn" data-back="weightScreen">← VOLVER</button>
-      <p class="eyebrow">PASO 4</p>
-      <h1>¿Cuántas<br>repeticiones?</h1>
-      <div id="repsButtons" class="button-grid five"></div>
-    </section>
-
-    <section id="setsScreen" class="screen hidden">
-      <button class="back-btn" data-back="repsScreen">← VOLVER</button>
-      <p class="eyebrow">PASO 5</p>
-      <h1>¿Cuántas<br>series?</h1>
-      <div id="setsButtons" class="button-grid four"></div>
-    </section>
-
-    <section id="loadedScreen" class="screen loaded-screen hidden">
-      <div class="loaded-check">✓</div>
-      <p class="eyebrow">ENTRENAMIENTO REGISTRADO</p>
-      <h1>CARGADO<span class="dot">.</span></h1>
-      <p id="loadedSummary" class="loaded-summary"></p>
-      <button id="nextExerciseBtn" class="big-btn primary">SIGUIENTE EJERCICIO</button>
-      <button id="finishBtn" class="big-btn">TERMINAR</button>
-    </section>
-  </main>
-  <div id="toast" role="status" aria-live="polite"></div>
-</body>
-</html>
+<main class="app">
+<header class="brand"><span class="brand-icon">G</span><span>GYM<span class="dot">.</span></span></header>
+<nav class="main-nav" aria-label="Secciones"><button class="nav-btn active" data-screen="startScreen">ENTRENAR</button><button class="nav-btn" data-screen="savedScreen">GUARDADO</button><button class="nav-btn" data-screen="progressScreen">PROGRESO</button></nav>
+<section id="startScreen" class="screen">
+<p class="eyebrow">REGISTRO DE ENTRENAMIENTO</p><h1>¿Cuándo<br>entrenaste?</h1>
+<div class="big-actions"><button id="todayBtn" class="big-btn primary">HOY</button><button id="otherDayBtn" class="big-btn">OTRO DÍA</button></div>
+<div id="otherDateWrap" class="date-wrap hidden"><label for="otherDate">Elegí la fecha</label><input id="otherDate" type="date"><button id="confirmDateBtn" class="big-btn primary">CONTINUAR</button></div>
+</section>
+<section id="muscleScreen" class="screen hidden"><button class="back-btn" data-back="startScreen">← VOLVER</button><p class="eyebrow">PASO 1</p><h1>¿Qué músculo<br>entrenaste?</h1><p id="chosenDate" class="date-caption"></p><div id="muscleButtons" class="button-grid six"></div></section>
+<section id="exerciseScreen" class="screen hidden"><button class="back-btn" data-back="muscleScreen">← VOLVER</button><p class="eyebrow">PASO 2</p><h1>¿Qué ejercicio?</h1><p id="chosenMuscle" class="date-caption"></p><div id="exerciseButtons" class="exercise-list"></div></section>
+<section id="weightScreen" class="screen hidden"><button class="back-btn" data-back="exerciseScreen">← VOLVER</button><p class="eyebrow">PASO 3</p><h1>Peso total</h1><p id="chosenExerciseWeight" class="date-caption"></p><div class="weight-total"><strong id="weightTotal">0</strong><span>KG</span></div><p class="hint">Tocá los botones para sumar peso</p><div id="weightButtons" class="button-grid five"></div><button id="weightContinue" class="big-btn primary continue-btn">CONTINUAR</button></section>
+<section id="repsScreen" class="screen hidden"><button class="back-btn" data-back="weightScreen">← VOLVER</button><p class="eyebrow">PASO 4</p><h1>¿Cuántas<br>repeticiones?</h1><div id="repsButtons" class="button-grid five"></div></section>
+<section id="setsScreen" class="screen hidden"><button class="back-btn" data-back="repsScreen">← VOLVER</button><p class="eyebrow">PASO 5</p><h1>¿Cuántas<br>series?</h1><div id="setsButtons" class="button-grid four"></div></section>
+<section id="loadedScreen" class="screen loaded-screen hidden"><div class="loaded-check">✓</div><p class="eyebrow">ENTRENAMIENTO REGISTRADO</p><h1>CARGADO<span class="dot">.</span></h1><p id="loadedSummary" class="loaded-summary"></p><button id="nextExerciseBtn" class="big-btn primary">SIGUIENTE EJERCICIO</button><button id="finishBtn" class="big-btn">TERMINAR</button><button id="seeSavedBtn" class="plain-btn">VER LO GUARDADO</button></section>
+<section id="savedScreen" class="screen hidden"><p class="eyebrow">TUS REGISTROS</p><h1>Guardado<span class="dot">.</span></h1><p class="section-help">Podés corregir pesos, repeticiones o borrar series y ejercicios.</p><div id="savedList" class="saved-list"></div></section>
+<section id="progressScreen" class="screen hidden"><p class="eyebrow">TU EVOLUCIÓN</p><h1>Progreso<span class="dot">.</span></h1><div id="progressSummary" class="progress-summary"></div><h2 class="subheading">Evolución por ejercicio</h2><div id="progressList" class="progress-list"></div></section>
+</main><div id="toast" role="status" aria-live="polite"></div>
+</body></html>
