@@ -1,0 +1,9 @@
+{
+  "appId": "com.pitucorporacion.gym",
+  "appName": "GYM",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": false
+  }
+}
