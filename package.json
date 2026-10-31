@@ -1,0 +1,16 @@
+{
+  "name": "gym-android-wrapper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Android package for the GYM training app",
+  "scripts": {
+    "build:android": "npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "7.4.3",
+    "@capacitor/core": "7.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "7.4.3"
+  }
+}
